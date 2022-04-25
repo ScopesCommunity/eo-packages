@@ -1,4 +1,4 @@
-prefix := "https://github.com/ScopesCommunity/eo-packages/blob/main/recipes/"
+prefix := "https://raw.githubusercontent.com/ScopesCommunity/eo-packages/main/recipes"
 cmd := (shell "." (dict))
 
 recipes :=
