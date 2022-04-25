@@ -1,0 +1,11 @@
+archive :=
+    download
+        https://github.com/ScopesCommunity/eo-packages/archive/refs/heads/main.zip
+
+preinstall-dir :=
+    commonpath
+        extract-archive
+
+package scopes-community
+    summary "Community repository of majoreo recipes"
+    in "/" "{preinstall-dir}/recipes"
