@@ -1,11 +1,10 @@
-archive :=
-    download
-        "https://github.com/ScopesCommunity/eo-packages/archive/refs/heads/main.zip"
+prefix := "https://github.com/ScopesCommunity/eo-packages/blob/main/recipes/"
+cmd := (shell "." (dict))
 
-preinstall-dir :=
-    commonpath
-        extract-archive
+recipes :=
+    then
+        cmd "yes | eo import {prefix}/hello-world.eo"
 
 package scopes-community
     summary "Community repository of majoreo recipes"
-    in "/" "{preinstall-dir}/recipes"
+    preinstall recipes
