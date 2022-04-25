@@ -1,6 +1,6 @@
 archive :=
     download
-        https://github.com/ScopesCommunity/eo-packages/archive/refs/heads/main.zip
+        "https://github.com/ScopesCommunity/eo-packages/archive/refs/heads/main.zip"
 
 preinstall-dir :=
     commonpath
