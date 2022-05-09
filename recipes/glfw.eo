@@ -1,0 +1,51 @@
+VERSION := "master"
+
+archive := (download "https://github.com/glfw/glfw/archive/{VERSION}.tar.gz")
+preinstall-dir :=
+    then
+        build-path := (commonpath (extract archive))
+        build-command :=
+            shell (mkdir "{build-path}/build")
+        install-tmp-dir := (tempdir)
+        build-command
+            "cmake -G 'Unix Makefiles' .. -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=on \
+                -DGLFW_BUILD_DOCS=off -DGLFW_BUILD_EXAMPLES=off -DGLFW_BUILD_TESTS=off \
+                -DGLFW_BUILD_WAYLAND=on -DGLFW_BUILD_X11=on -DGLFW_INSTALL=on -DCMAKE_INSTALL_PREFIX={install-tmp-dir}"
+        build-command "make -j {cpu-core-count}"
+        build-command "make install"
+        install-tmp-dir
+
+bindings :=
+    then
+        file :=
+            tempfile
+                """"shared-library "libglfw.so"
+
+                    inline filter-scope (scope pattern)
+                        pattern as:= string
+                        fold (scope = (Scope)) for k v in scope
+                            let name = (k as Symbol as string)
+                            let match? start end = ('match? pattern name)
+                            if match?
+                                'bind scope (Symbol (rslice name end)) v
+                            else
+                                scope
+
+                    let header =
+                        include
+                            "GLFW/glfw3.h"
+
+                    let glfw-extern = (filter-scope header.extern "^glfw")
+                    let glfw-typedef = (filter-scope header.typedef "^GLFW")
+                    let glfw-define = (filter-scope header.define "^(?=GLFW_)")
+
+                    .. glfw-extern glfw-typedef glfw-define
+        (shell ".") "cp {file} {preinstall-dir}/glfw.sc"
+
+package glfw
+    summary "A multi-platform library for OpenGL, OpenGL ES, Vulkan, window and input"
+    platform linux unknown
+    version VERSION
+    alias "/lib/libglfw.so" "{preinstall-dir}/lib/libglfw.so"
+    alias "/lib/scopes/packages/FFI/glfw.sc" "{preinstall-dir}/glfw.sc"
+    in "/include" "{preinstall-dir}/include/GLFW"
