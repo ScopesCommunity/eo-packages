@@ -1,3 +1,6 @@
+# NOTE: On Linux, compilation requires installation of some dependencies. Please read
+# https://www.glfw.org/docs/latest/compile.html (Installing Dependencies) for more information.
+
 VERSION := "master"
 
 archive := (download "https://github.com/glfw/glfw/archive/{VERSION}.tar.gz")
