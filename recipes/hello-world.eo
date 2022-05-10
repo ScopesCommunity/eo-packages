@@ -1,4 +1,0 @@
-package hello-world
-    summary "Test recipe that prints hello world to stdout"
-    version "1"
-    postinstall ((shell "." (dict)) "echo hello world")
