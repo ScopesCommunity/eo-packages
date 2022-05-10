@@ -26,5 +26,5 @@ package glfw
     platform linux unknown
     version VERSION
     alias "/lib/libglfw.so" "{preinstall-dir}/lib/libglfw.so"
-    alias "/lib/scopes/packages/FFI/glfw.sc" bindings
+    alias "/lib/scopes/packages/glfw.sc" bindings
     in "/include" "{preinstall-dir}/include/GLFW"
