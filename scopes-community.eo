@@ -8,3 +8,4 @@ fn pkg (name)
 pkg "glfw"
 pkg "sdl2"
 pkg "stb"
+pkg "wgpu"
