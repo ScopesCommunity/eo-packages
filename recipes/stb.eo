@@ -59,7 +59,7 @@ shared-library :=
         cmd "gcc -shared -fPIC -O2 -o {libname} -I.. -x c {amalgamated-source} ../stb_vorbis.c"
         "{bindir}/{libname}"
 
-bindings := (commonpath (extract (download "https://github.com/radgeRayden/scopes-bindings/archive/master.tar.gz")))
+bindings := (commonpath (extract (download "https://github.com/ScopesCommunity/eo-packages/archive/master.tar.gz")))
 
 package stb
     summary "stb single-file public domain libraries for C/C++"
@@ -83,4 +83,4 @@ package stb
     alias "/include/stb_include.h" "{source-path}/stb_include.h"
     alias "/include/stb_vorbis.c" "{source-path}/stb_vorbis.c"
 
-    in "/lib/scopes/packages" "{bindings}/FFI/stb"
+    in "/lib/scopes/packages" "{bindings}/bindings/stb"
