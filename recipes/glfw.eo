@@ -19,7 +19,7 @@ preinstall-dir :=
         install-tmp-dir
 
 bindings :=
-    download "https://raw.githubusercontent.com/ScopesCommunity/eo-packages/bindings/glfw.sc"
+    download "https://raw.githubusercontent.com/ScopesCommunity/eo-packages/main/bindings/glfw.sc"
 
 package glfw
     summary "A multi-platform library for OpenGL, OpenGL ES, Vulkan, window and input"
