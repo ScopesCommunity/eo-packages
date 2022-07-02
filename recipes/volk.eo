@@ -1,0 +1,36 @@
+VERSION := "master"
+SUMMARY := "Meta loader for Vulkan API"
+
+archive :=
+    download
+        "https://github.com/zeux/volk/archive/{VERSION}.zip"
+
+build-path :=
+    commonpath
+        extract archive
+
+fn artifact (name)
+    then
+        build-command :=
+            shell "{build-path}"
+        build-command "gcc -shared -O2 -o {name} volk.c"
+        "{build-path}/{name}"
+
+bindings :=
+    download "https://raw.githubusercontent.com/ScopesCommunity/eo-packages/main/bindings/volk.sc"
+
+package volk
+    summary SUMMARY
+    platform windows-mingw
+    version VERSION
+    alias "/lib/libvolk.dll" (artifact "libvolk.dll")
+    alias "/lib/scopes/packages/volk.sc" bindings
+    alias "/include/volk.h" "{preinstall-dir}/volk.h"
+
+package volk
+    summary SUMMARY
+    platform linux unknown
+    version VERSION
+    alias "/lib/libvolk.dll" (artifact "libvolk.so")
+    alias "/lib/scopes/packages/volk.sc" bindings
+    alias "/include/volk.h" "{preinstall-dir}/volk.h"
