@@ -6,7 +6,6 @@ case 'windows
 default
     error "Unsupported OS"
 
-
 inline filter-scope (scope pattern)
     pattern as:= string
     fold (scope = (Scope)) for k v in scope
