@@ -1,4 +1,10 @@
-shared-library "libwgpu.so"
+switch operating-system
+case 'linux
+    shared-library "libwgpu.so"
+case 'windows
+    shared-library "libwgpu.dll"
+default
+    error "Unsupported OS"
 
 inline filter-scope (scope pattern)
     pattern as:= string
