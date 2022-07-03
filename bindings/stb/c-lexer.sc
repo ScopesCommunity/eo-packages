@@ -1,4 +1,11 @@
-shared-library "libstb.so"
+switch operating-system
+case 'linux
+    shared-library "libstb.so"
+case 'windows
+    shared-library "libstb.dll"
+default
+    error "Unsupported OS"
+
 
 inline filter-scope (scope pattern)
     pattern as:= string

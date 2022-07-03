@@ -2,6 +2,7 @@
 # code or mandatory configuration were excluded.
 
 VERSION := "master"
+SUMMARY := "stb single-file public domain libraries for C/C++"
 
 amalgamated-source :=
     tempfile
@@ -62,8 +63,32 @@ shared-library :=
 bindings := (commonpath (extract (download "https://github.com/ScopesCommunity/eo-packages/archive/master.tar.gz")))
 
 package stb
-    summary "stb single-file public domain libraries for C/C++"
+    summary SUMMARY
     platform linux unknown
+    version VERSION
+    alias "/lib/{libname}" shared-library
+
+    alias "/include/stb_hexwave.h" "{source-path}/stb_hexwave.h"
+    alias "/include/stb_image.h" "{source-path}/stb_image.h"
+    alias "/include/stb_rect_pack.h" "{source-path}/stb_rect_pack.h"
+    alias "/include/stb_truetype.h" "{source-path}/stb_truetype.h"
+    alias "/include/stb_image_write.h" "{source-path}/stb_image_write.h"
+    alias "/include/stb_image_resize.h" "{source-path}/stb_image_resize.h"
+    alias "/include/stb_sprintf.h" "{source-path}/stb_sprintf.h"
+    alias "/include/stb_voxel_render.h" "{source-path}/stb_voxel_render.h"
+    alias "/include/stb_dxt.h" "{source-path}/stb_dxt.h"
+    alias "/include/stb_herringbone_wang_tile.h" "{source-path}/stb_herringbone_wang_tile.h"
+    alias "/include/stb_c_lexer.h" "{source-path}/stb_c_lexer.h"
+    alias "/include/stb_divide.h" "{source-path}/stb_divide.h"
+    alias "/include/stb_leakcheck.h" "{source-path}/stb_leakcheck.h"
+    alias "/include/stb_include.h" "{source-path}/stb_include.h"
+    alias "/include/stb_vorbis.c" "{source-path}/stb_vorbis.c"
+
+    in "/lib/scopes/packages" "{bindings}/bindings/stb"
+
+package stb
+    summary SUMMARY
+    platform windows-mingw
     version VERSION
     alias "/lib/{libname}" shared-library
 
