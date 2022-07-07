@@ -3,7 +3,7 @@ TAG := "v0.12.0.1"
 SUMMARY := "Native WebGPU implementation based on wgpu-core "
 
 # Build from source
-fn git-release-dir (toolchain)
+git-release-dir :=
     then
         build-path := (tempdir)
         cmd :=
@@ -29,11 +29,9 @@ package wgpu-native
     version VERSION
     summary SUMMARY
 
-    dir := (git-release-dir "nightly-x86_64-unknown-linux-gnu")
-
-    alias "/include/webgpu.h" "{dir}/webgpu.h"
-    alias "/include/wgpu.h" "{dir}/wgpu.h"
-    alias "/lib/libwgpu.so" "{dir}/libwgpu.so"
+    alias "/include/webgpu.h" "{git-release-dir}/webgpu.h"
+    alias "/include/wgpu.h" "{git-release-dir}/wgpu.h"
+    alias "/lib/libwgpu.so" "{git-release-dir}/libwgpu.so"
     alias "/lib/scopes/packages/wgpu.sc" bindings
 
 package wgpu-native
@@ -41,11 +39,9 @@ package wgpu-native
     version VERSION
     summary SUMMARY
 
-    dir := (git-release-dir "nightly-x86_64-pc-windows-gnu")
-
-    alias "/include/webgpu.h" "{dir}/webgpu.h"
-    alias "/include/wgpu.h" "{dir}/wgpu.h"
-    alias "/lib/libwgpu.dll" "{dir}/libwgpu.dll"
+    alias "/include/webgpu.h" "{git-release-dir}/webgpu.h"
+    alias "/include/wgpu.h" "{git-release-dir}/wgpu.h"
+    alias "/lib/libwgpu.dll" "{git-release-dir}/libwgpu.dll"
     alias "/lib/scopes/packages/wgpu.sc" bindings
 
 package wgpu-native-release
