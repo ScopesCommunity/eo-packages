@@ -5,6 +5,7 @@ package scopes-community
 fn pkg (name)
     shortcut "{name}" "https://raw.githubusercontent.com/ScopesCommunity/eo-packages/main/recipes/{name}.eo"
 
+pkg "glad"
 pkg "glfw"
 pkg "sdl2"
 pkg "stb"
