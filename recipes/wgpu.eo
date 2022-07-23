@@ -41,7 +41,7 @@ package wgpu-native
 
     alias "/include/webgpu.h" "{git-release-dir}/webgpu.h"
     alias "/include/wgpu.h" "{git-release-dir}/wgpu.h"
-    alias "/lib/libwgpu.dll" "{git-release-dir}/wgpu_native.dll"
+    alias "/lib/wgpu_native.dll" "{git-release-dir}/libwgpu.dll"
     alias "/lib/scopes/packages/wgpu.sc" bindings
 
 package wgpu-native-release
@@ -65,5 +65,5 @@ package wgpu-native-release
 
     alias "/include/webgpu.h" "{dir}/webgpu.h"
     alias "/include/wgpu.h" "{dir}/wgpu.h"
-    alias "/lib/libwgpu.dll" "{dir}/wgpu_native.dll"
+    alias "/lib/wgpu_native.dll" "{dir}/libwgpu.dll"
     alias "/lib/scopes/packages/wgpu.sc" bindings
