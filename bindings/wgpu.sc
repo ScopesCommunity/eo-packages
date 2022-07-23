@@ -2,7 +2,7 @@ switch operating-system
 case 'linux
     shared-library "libwgpu.so"
 case 'windows
-    shared-library "libwgpu.dll"
+    shared-library "wgpu_native.dll"
 default
     error "Unsupported OS"
 
