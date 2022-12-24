@@ -1,10 +1,11 @@
 switch operating-system
 case 'linux
-    shared-library "libstb.so"
+    shared-library "libvolk.so"
 case 'windows
-    shared-library "libstb.dll"
+    shared-library "libvolk.dll"
 default
     error "Unsupported OS"
+
 
 inline filter-scope (scope pattern)
     pattern as:= string
@@ -17,9 +18,11 @@ inline filter-scope (scope pattern)
             scope
 
 let header =
-    include "stb_vorbis.c"
-        options "-DSTB_VORBIS_HEADER_ONLY"
+    include
+        "volk.h"
 
-..
-    filter-scope header.extern "^stb_vorbis_"
-    filter-scope header.typedef "^stb_vorbis_"
+let volk-extern = (filter-scope header.extern "(^vk|(?=volk))")
+let volk-typedef = (filter-scope header.typedef "^Vk")
+let volk-define = (filter-scope header.define "^(?=VK_)")
+
+.. volk-extern volk-typedef volk-define

@@ -1,0 +1,42 @@
+VERSION := "gl=4.6"
+SUMMARY := "GL Loader based on the official specs"
+GL_PROFILE := "core"
+
+fn preinstall-dir (libname)
+    then
+        build-path :=
+            commonpath
+                extract
+                    download "https://github.com/Dav1dde/glad/archive/master.zip"
+        cmd := (shell build-path)
+        mkdir "{build-path}/outdir"
+        cmd "python -m glad --profile {GL_PROFILE} --api {VERSION} --generator c --out-path outdir/"
+        cmd "gcc -O2 -shared -o outdir/{libname} -fPIC outdir/src/glad.c -Ioutdir/include"
+        "{build-path}/outdir"
+
+bindings :=
+    download "https://raw.githubusercontent.com/ScopesCommunity/eo-packages/main/bindings/glad.sc"
+
+package glad
+    platform linux
+    version VERSION
+    summary SUMMARY
+
+    libname := "libglad.so"
+    dir := (preinstall-dir libname)
+
+    alias "/lib/{libname}" "{dir}/{libname}"
+    in "/include" "{dir}/include/glad" "{dir}/include/KHR"
+    alias "/lib/scopes/packages/glad.sc" bindings
+
+package glad
+    platform windows-mingw
+    version VERSION
+    summary SUMMARY
+
+    libname := "libglad.dll"
+    dir := (preinstall-dir libname)
+
+    alias "/lib/{libname}" "{dir}/{libname}"
+    in "/include" "{dir}/include/glad" "{dir}/include/KHR"
+    alias "/lib/scopes/packages/glad.sc" bindings

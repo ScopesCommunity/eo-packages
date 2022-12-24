@@ -1,4 +1,10 @@
-shared-library "libSDL2.so"
+switch operating-system
+case 'linux
+    shared-library "libSDL2.so"
+case 'windows
+    shared-library "SDL2.dll"
+default
+    error "Unsupported OS"
 
 inline filter-scope (scope pattern)
     pattern as:= string
@@ -14,6 +20,7 @@ let header =
     include
         """"#include <SDL2/SDL.h>
             #include <SDL2/SDL_syswm.h>
+            #include <SDL2/SDL_vulkan.h>
 
 let sdl-extern = (filter-scope header.extern "^SDL_")
 let sdl-typedef = (filter-scope header.typedef "^SDL_")

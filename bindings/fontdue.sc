@@ -1,8 +1,8 @@
 switch operating-system
 case 'linux
-    shared-library "libstb.so"
+    shared-library "libfontdue_native.so"
 case 'windows
-    shared-library "libstb.dll"
+    shared-library "fontdue_native.dll"
 default
     error "Unsupported OS"
 
@@ -17,9 +17,10 @@ inline filter-scope (scope pattern)
             scope
 
 let header =
-    include "stb_vorbis.c"
-        options "-DSTB_VORBIS_HEADER_ONLY"
+    include
+        "fontdue.h"
 
-..
-    filter-scope header.extern "^stb_vorbis_"
-    filter-scope header.typedef "^stb_vorbis_"
+let fontdue-extern = (filter-scope header.extern "^ftd_")
+let fontdue-typedef = (filter-scope header.typedef "^FTD_")
+
+.. fontdue-extern fontdue-typedef

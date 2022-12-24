@@ -1,8 +1,8 @@
 switch operating-system
 case 'linux
-    shared-library "libstb.so"
+    shared-library "libglad.so"
 case 'windows
-    shared-library "libstb.dll"
+    shared-library "libglad.dll"
 default
     error "Unsupported OS"
 
@@ -17,9 +17,13 @@ inline filter-scope (scope pattern)
             scope
 
 let header =
-    include "stb_vorbis.c"
-        options "-DSTB_VORBIS_HEADER_ONLY"
+    include
+        """"#include <glad/glad.h>
 
-..
-    filter-scope header.extern "^stb_vorbis_"
-    filter-scope header.typedef "^stb_vorbis_"
+let glad-typedef = (filter-scope header.typedef "^GL")
+let glad-define = (filter-scope header.define "^((?=GL_)|gl(?=[A-Z]))")
+
+'bind
+    .. glad-typedef glad-define
+    'gladLoadGL
+    header.extern.gladLoadGL
