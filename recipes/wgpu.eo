@@ -1,6 +1,8 @@
 VERSION := "master"
-TAG := "v0.12.0.1"
+TAG := "v0.14.2.3"
 SUMMARY := "Native WebGPU implementation based on wgpu-core "
+
+LIBNAME := "wgpu_native"
 
 # Build from source
 git-release-dir :=
@@ -31,7 +33,7 @@ package wgpu-native
 
     alias "/include/webgpu.h" "{git-release-dir}/webgpu.h"
     alias "/include/wgpu.h" "{git-release-dir}/wgpu.h"
-    alias "/lib/libwgpu.so" "{git-release-dir}/libwgpu.so"
+    alias "/lib/lib{LIBNAME}.so" "{git-release-dir}/lib{LIBNAME}.so"
     alias "/lib/scopes/packages/wgpu.sc" bindings
 
 package wgpu-native
@@ -41,7 +43,7 @@ package wgpu-native
 
     alias "/include/webgpu.h" "{git-release-dir}/webgpu.h"
     alias "/include/wgpu.h" "{git-release-dir}/wgpu.h"
-    alias "/lib/wgpu_native.dll" "{git-release-dir}/libwgpu.dll"
+    alias "/lib/{LIBNAME}.dll" "{git-release-dir}/{LIBNAME}.dll"
     alias "/lib/scopes/packages/wgpu.sc" bindings
 
 package wgpu-native-release
@@ -53,7 +55,7 @@ package wgpu-native-release
 
     alias "/include/webgpu.h" "{dir}/webgpu.h"
     alias "/include/wgpu.h" "{dir}/wgpu.h"
-    alias "/lib/libwgpu.so" "{dir}/libwgpu.so"
+    alias "/lib/lib{LIBNAME}.so" "{dir}/lib{LIBNAME}.so"
     alias "/lib/scopes/packages/wgpu.sc" bindings
 
 package wgpu-native-release
@@ -65,5 +67,5 @@ package wgpu-native-release
 
     alias "/include/webgpu.h" "{dir}/webgpu.h"
     alias "/include/wgpu.h" "{dir}/wgpu.h"
-    alias "/lib/wgpu_native.dll" "{dir}/libwgpu.dll"
+    alias "/lib/{LIBNAME}.dll" "{dir}/{LIBNAME}.dll"
     alias "/lib/scopes/packages/wgpu.sc" bindings

@@ -1,6 +1,6 @@
 switch operating-system
 case 'linux
-    shared-library "libwgpu.so"
+    shared-library "libwgpu_native.so"
 case 'windows
     shared-library "wgpu_native.dll"
 default
@@ -22,7 +22,18 @@ let header =
 
 let wgpu-extern = (filter-scope header.extern "^wgpu")
 let wgpu-typedef = (filter-scope header.typedef "^WGPU")
-let wgpu-define = (filter-scope header.define "^(?=WGPU_)")
+let wgpu-define =
+    ..
+        do
+            let WGPU_ARRAY_LAYER_COUNT_UNDEFINED = 0xffffffff:u32
+            let WGPU_COPY_STRIDE_UNDEFINED = 0xffffffff:u32
+            let WGPU_LIMIT_U32_UNDEFINED = 0xffffffff:u32
+            let WGPU_LIMIT_U64_UNDEFINED = 0xffffffffffffffff:u64
+            let WGPU_MIP_LEVEL_COUNT_UNDEFINED = 0xffffffff:u32
+            let WGPU_WHOLE_MAP_SIZE = header.define.SIZE_MAX
+            let WGPU_WHOLE_SIZE = 0xffffffffffffffff:u64
+            locals;
+        filter-scope header.define "^(?=WGPU_)"
 
 inline enum-constructor (T)
     bitcast 0 T
