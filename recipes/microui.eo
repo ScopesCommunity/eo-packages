@@ -1,0 +1,30 @@
+VERSION := "master"
+SUMMARY := "A tiny immediate-mode UI library"
+
+archive := (download "https://github.com/rxi/microui/archive/{VERSION}.tar.gz")
+source-path := (commonpath (extract archive))
+
+fn shared-library (libname)
+    then
+        bindir := (mkdir "{source-path}/build")
+        cmd := (shell bindir)
+        cmd "gcc -shared -fPIC -O2 -o {libname} -I../src -x c ../src/microui.c"
+        "{bindir}/{libname}"
+
+package microui
+    summary SUMMARY
+    platform linux unknown
+    version VERSION
+
+    libname := "libmicroui.so"
+    alias "/lib/{libname}" (shared-library libname)
+    alias "include/microui.h" "{source-path}/src/microui.h"
+
+package microui
+    summary SUMMARY
+    platform windows-mingw
+    version VERSION
+
+    libname := "microui.dll"
+    alias "/lib/{libname}" (shared-library libname)
+    alias "include/microui.h" "{source-path}/src/microui.h"
