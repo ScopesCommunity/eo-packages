@@ -61,6 +61,10 @@ let sdl-macros =
 
         inline SDL_VERSION_ATLEAST (major minor patch)
             (SDL_COMPILEDVERSION) >= (SDL_VERSIONNUM major minor patch)
+
+        let SDL_INIT_EVERYTHING =
+            sdl.SDL_INIT_TIMER | sdl.SDL_INIT_AUDIO | sdl.SDL_INIT_VIDEO | sdl.SDL_INIT_EVENTS | \
+            sdl.SDL_INIT_JOYSTICK | sdl.SDL_INIT_HAPTIC | sdl.SDL_INIT_GAMECONTROLLER | sdl.SDL_INIT_SENSOR
         locals;
 
 inline enum-constructor (T)
