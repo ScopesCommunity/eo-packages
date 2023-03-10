@@ -22,6 +22,13 @@ let header =
 
 let wgpu-extern = (filter-scope header.extern "^wgpu")
 let wgpu-typedef = (filter-scope header.typedef "^WGPU")
+
+let SIZE_MAX =
+    static-if (operating-system == 'windows)
+        header.define.SIZE_MAX
+    else
+        header.define.__SIZE_MAX__
+
 let wgpu-define =
     ..
         do
@@ -30,7 +37,7 @@ let wgpu-define =
             let WGPU_LIMIT_U32_UNDEFINED = 0xffffffff:u32
             let WGPU_LIMIT_U64_UNDEFINED = 0xffffffffffffffff:u64
             let WGPU_MIP_LEVEL_COUNT_UNDEFINED = 0xffffffff:u32
-            let WGPU_WHOLE_MAP_SIZE = header.define.SIZE_MAX
+            let WGPU_WHOLE_MAP_SIZE = SIZE_MAX
             let WGPU_WHOLE_SIZE = 0xffffffffffffffff:u64
             locals;
         filter-scope header.define "^(?=WGPU_)"
