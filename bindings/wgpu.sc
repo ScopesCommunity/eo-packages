@@ -6,6 +6,8 @@ case 'windows
 default
     error "Unsupported OS"
 
+using import Array
+
 inline filter-scope (scope pattern)
     pattern as:= string
     fold (scope = (Scope)) for k v in scope
@@ -43,8 +45,8 @@ wgpu-define :=
 inline enum-constructor (T)
     bitcast 0 T
 
-vvv bind wgpu-enum
-fold (scope = (Scope)) for k v in header.enum
+for k v in header.enum
+    local old-symbols : (Array Symbol)
     T := (v as type)
     'set-symbol T '__typecall enum-constructor
 
@@ -56,9 +58,11 @@ fold (scope = (Scope)) for k v in header.enum
         if match?
             field := (Symbol (rslice original-name end))
             'set-symbol T field v
+            'append old-symbols original-symbol
 
-    # we already know all enums here should match WGPU prefix.
-    name := rslice (k as Symbol as string) (countof "WGPU")
-    'bind scope (Symbol name) v
+    for sym in old-symbols
+        sc_type_del_symbol T sym
 
-.. wgpu-enum wgpu-extern wgpu-typedef wgpu-define
+run-stage;
+
+.. wgpu-extern wgpu-typedef wgpu-define
