@@ -1,6 +1,8 @@
 VERSION := "master"
 SUMMARY := "Platform independent low-level JIT compiler"
 
+update-url "https://raw.githubusercontent.com/ScopesCommunity/eo-packages/main/recipes/sljit.eo"
+
 archive := (download "https://github.com/zherczeg/sljit/archive/{VERSION}.tar.gz")
 source-path := (commonpath (extract archive))
 

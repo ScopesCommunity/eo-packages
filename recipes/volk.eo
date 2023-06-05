@@ -1,6 +1,8 @@
 VERSION := "master"
 SUMMARY := "Meta loader for Vulkan API"
 
+update-url "https://raw.githubusercontent.com/ScopesCommunity/eo-packages/main/recipes/volk.eo"
+
 archive :=
     download
         "https://github.com/zeux/volk/archive/{VERSION}.zip"

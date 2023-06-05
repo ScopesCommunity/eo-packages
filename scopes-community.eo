@@ -1,3 +1,5 @@
+update-url "https://raw.githubusercontent.com/ScopesCommunity/eo-packages/main/scopes-community.eo"
+
 package scopes-community
     summary "Meta package for the Scopes Community eo repository"
     version "latest"

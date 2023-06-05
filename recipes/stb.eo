@@ -4,6 +4,8 @@
 VERSION := "master"
 SUMMARY := "stb single-file public domain libraries for C/C++"
 
+update-url "https://raw.githubusercontent.com/ScopesCommunity/eo-packages/main/recipes/stb.eo"
+
 amalgamated-source :=
     tempfile
         """"#define STB_HEXWAVE_IMPLEMENTATION

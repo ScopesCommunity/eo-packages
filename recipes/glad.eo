@@ -2,6 +2,8 @@ VERSION := "gl=4.6"
 SUMMARY := "GL Loader based on the official specs"
 GL_PROFILE := "core"
 
+update-url "https://raw.githubusercontent.com/ScopesCommunity/eo-packages/main/recipes/glad.eo"
+
 fn preinstall-dir (libname)
     then
         build-path :=

@@ -1,6 +1,8 @@
 VERSION := "master"
 SUMMARY := "A tiny immediate-mode UI library"
 
+update-url "https://raw.githubusercontent.com/ScopesCommunity/eo-packages/main/recipes/microui.eo"
+
 archive := (download "https://github.com/rxi/microui/archive/{VERSION}.tar.gz")
 source-path := (commonpath (extract archive))
 

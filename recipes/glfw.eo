@@ -3,6 +3,8 @@
 
 VERSION := "master"
 
+update-url "https://raw.githubusercontent.com/ScopesCommunity/eo-packages/main/recipes/glfw.eo"
+
 archive := (download "https://github.com/glfw/glfw/archive/{VERSION}.tar.gz")
 preinstall-dir :=
     then
