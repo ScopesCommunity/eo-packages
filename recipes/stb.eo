@@ -93,7 +93,7 @@ package stb
     platform windows-mingw
     version VERSION
 
-    libname := "libstb.dll"
+    libname := "stb.dll"
     alias "/lib/{libname}" (shared-library libname)
 
     alias "/include/stb_hexwave.h" "{source-path}/stb_hexwave.h"

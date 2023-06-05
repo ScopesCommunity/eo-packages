@@ -2,7 +2,7 @@ switch operating-system
 case 'linux
     shared-library "libstb.so"
 case 'windows
-    shared-library "libstb.dll"
+    shared-library "stb.dll"
 default
     error "Unsupported OS"
 
