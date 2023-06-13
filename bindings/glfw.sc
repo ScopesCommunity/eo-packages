@@ -1,4 +1,10 @@
-shared-library "libglfw.so"                                
+switch operating-system
+case 'linux
+    shared-library "libglfw.so"
+case 'windows
+    shared-library "glfw3.dll"
+default
+    error "Unsupported OS"
                                                            
 inline filter-scope (scope pattern)                        
     pattern as:= string                                    

@@ -2,31 +2,44 @@
 # https://www.glfw.org/docs/latest/compile.html (Installing Dependencies) for more information.
 
 VERSION := "master"
+SUMMARY := "A multi-platform library for OpenGL, OpenGL ES, Vulkan, window and input"
 
 update-url "https://raw.githubusercontent.com/ScopesCommunity/eo-packages/main/recipes/glfw.eo"
 
 archive := (download "https://github.com/glfw/glfw/archive/{VERSION}.tar.gz")
-preinstall-dir :=
+fn preinstall-dir (make generator)
     then
         build-path := (commonpath (extract archive))
         build-command :=
             shell (mkdir "{build-path}/build")
         install-tmp-dir := (tempdir)
         build-command
-            "cmake -G 'Unix Makefiles' .. -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=on \
+            "cmake -G \"{generator}\" .. -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=on \
                 -DGLFW_BUILD_DOCS=off -DGLFW_BUILD_EXAMPLES=off -DGLFW_BUILD_TESTS=off \
                 -DGLFW_BUILD_WAYLAND=on -DGLFW_BUILD_X11=on -DGLFW_INSTALL=on -DCMAKE_INSTALL_PREFIX={install-tmp-dir}"
-        build-command "make -j {cpu-core-count}"
-        build-command "make install"
+        build-command "{make} -j {cpu-core-count}"
+        build-command "{make} install"
         install-tmp-dir
 
 bindings :=
     download "https://raw.githubusercontent.com/ScopesCommunity/eo-packages/main/bindings/glfw.sc"
 
 package glfw
-    summary "A multi-platform library for OpenGL, OpenGL ES, Vulkan, window and input"
     platform linux unknown
     version VERSION
+    summary SUMMARY
+
+    preinstall-dir := (preinstall-dir "make" "Unix Makefiles")
     alias "/lib/libglfw.so" "{preinstall-dir}/lib/libglfw.so"
+    alias "/lib/scopes/packages/glfw.sc" bindings
+    in "/include" "{preinstall-dir}/include/GLFW"
+
+package glfw
+    platform windows-mingw
+    version VERSION
+    summary SUMMARY
+
+    preinstall-dir := (preinstall-dir "mingw32-make" "MinGW Makefiles")
+    alias "/lib/glfw3.dll" "{preinstall-dir}/bin/glfw3.dll"
     alias "/lib/scopes/packages/glfw.sc" bindings
     in "/include" "{preinstall-dir}/include/GLFW"
