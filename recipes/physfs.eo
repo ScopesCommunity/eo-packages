@@ -17,8 +17,8 @@ fn preinstall-dir (generator make)
                 mkdir "{build-path}/build"
         install-dir := (tempdir)
         cmd "cmake .. -G \"{generator}\" -DCMAKE_INSTALL_PREFIX={install-dir}"
-        cmd "${make} -j {cpu-core-count}"
-        cmd "${make} install"
+        cmd "{make} -j {cpu-core-count}"
+        cmd "{make} install"
         install-dir
 
 fn patchelf (soname libpath)
