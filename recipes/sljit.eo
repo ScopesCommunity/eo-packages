@@ -14,6 +14,8 @@ fn shared-library (libname)
         cmd "gcc -shared -o ./bin/{libname} ./bin/sljitLir.o"
         "{bindir}/{libname}"
 
+license := (download "https://raw.githubusercontent.com/zherczeg/sljit/master/LICENSE")
+
 package sljit
     summary SUMMARY
     platform linux unknown
@@ -25,6 +27,7 @@ package sljit
     alias "include/sljitConfig.h"         "{source-path}/sljit_src/sljitConfig.h"
     alias "include/sljitConfigInternal.h" "{source-path}/sljit_src/sljitConfigInternal.h"
     alias "include/sljitLir.h"            "{source-path}/sljit_src/sljitLir.h"
+    alias "/licenses/sljit.txt" license
 
 package sljit
     summary SUMMARY
@@ -37,3 +40,4 @@ package sljit
     alias "include/sljitConfig.h"         "{source-path}/sljit_src/sljitConfig.h"
     alias "include/sljitConfigInternal.h" "{source-path}/sljit_src/sljitConfigInternal.h"
     alias "include/sljitLir.h"            "{source-path}/sljit_src/sljitLir.h"
+    alias "/licenses/sljit.txt" license

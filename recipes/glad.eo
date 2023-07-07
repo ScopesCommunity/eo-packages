@@ -19,6 +19,8 @@ fn preinstall-dir (libname)
 bindings :=
     download "https://raw.githubusercontent.com/ScopesCommunity/eo-packages/main/bindings/glad.sc"
 
+license := (download "https://github.com/Dav1dde/glad/raw/glad2/LICENSE")
+
 package glad
     platform linux
     version VERSION
@@ -30,6 +32,7 @@ package glad
     alias "/lib/{libname}" "{dir}/{libname}"
     in "/include" "{dir}/include/glad" "{dir}/include/KHR"
     alias "/lib/scopes/packages/glad.sc" bindings
+    alias "/licenses/glad.txt" license
 
 package glad
     platform windows-mingw
@@ -42,3 +45,4 @@ package glad
     alias "/lib/{libname}" "{dir}/{libname}"
     in "/include" "{dir}/include/glad" "{dir}/include/KHR"
     alias "/lib/scopes/packages/glad.sc" bindings
+    alias "/licenses/glad.txt" license

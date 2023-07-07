@@ -21,6 +21,8 @@ fn artifact (name)
 bindings :=
     download "https://raw.githubusercontent.com/ScopesCommunity/eo-packages/main/bindings/volk.sc"
 
+license := (download "https://raw.githubusercontent.com/zeux/volk/master/LICENSE.md")
+
 package volk
     summary SUMMARY
     platform windows-mingw
@@ -28,6 +30,7 @@ package volk
     alias "/lib/libvolk.dll" (artifact "libvolk.dll")
     alias "/lib/scopes/packages/volk.sc" bindings
     alias "/include/volk.h" "{build-path}/volk.h"
+    alias "/licenses/volk.txt" license
 
 package volk
     summary SUMMARY
@@ -36,3 +39,4 @@ package volk
     alias "/lib/libvolk.dll" (artifact "libvolk.so")
     alias "/lib/scopes/packages/volk.sc" bindings
     alias "/include/volk.h" "{build-path}/volk.h"
+    alias "/licenses/volk.txt" license

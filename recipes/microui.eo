@@ -13,6 +13,8 @@ fn shared-library (libname)
         cmd "gcc -shared -fPIC -O2 -o {libname} -I../src -x c ../src/microui.c"
         "{bindir}/{libname}"
 
+license := (download "https://raw.githubusercontent.com/rxi/microui/master/LICENSE")
+
 package microui
     summary SUMMARY
     platform linux unknown
@@ -21,6 +23,7 @@ package microui
     libname := "libmicroui.so"
     alias "/lib/{libname}" (shared-library libname)
     alias "include/microui.h" "{source-path}/src/microui.h"
+    alias "/licenses/microui.txt" license
 
 package microui
     summary SUMMARY
@@ -30,3 +33,4 @@ package microui
     libname := "microui.dll"
     alias "/lib/{libname}" (shared-library libname)
     alias "include/microui.h" "{source-path}/src/microui.h"
+    alias "/licenses/microui.txt" license
