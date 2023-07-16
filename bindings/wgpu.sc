@@ -7,6 +7,7 @@ default
     error "Unsupported OS"
 
 using import Array
+using import slice
 
 inline filter-scope (scope pattern)
     pattern as:= string

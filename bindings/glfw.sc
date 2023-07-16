@@ -5,6 +5,8 @@ case 'windows
     shared-library "glfw3.dll"
 default
     error "Unsupported OS"
+
+using import slice
                                                            
 inline filter-scope (scope pattern)                        
     pattern as:= string                                    
