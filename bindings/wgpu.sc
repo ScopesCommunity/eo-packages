@@ -6,7 +6,7 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import Array
+using import Array slice
 using import ffi-helper
 
 header := include "wgpu.h"
