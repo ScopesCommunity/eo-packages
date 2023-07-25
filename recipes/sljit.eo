@@ -20,6 +20,7 @@ package sljit
     summary SUMMARY
     platform linux unknown
     version VERSION
+    depends ffi-helper
 
     libname := "libsljit.so"
     alias "/lib/{libname}" (shared-library libname)
@@ -33,6 +34,7 @@ package sljit
     summary SUMMARY
     platform windows-mingw
     version VERSION
+    depends ffi-helper
 
     libname := "sljit.dll"
     alias "/lib/{libname}" (shared-library libname)

@@ -25,6 +25,7 @@ package glad
     platform linux
     version VERSION
     summary SUMMARY
+    depends ffi-helper
 
     libname := "libglad.so"
     dir := (preinstall-dir libname)
@@ -38,6 +39,7 @@ package glad
     platform windows-mingw
     version VERSION
     summary SUMMARY
+    depends ffi-helper
 
     libname := "libglad.dll"
     dir := (preinstall-dir libname)

@@ -27,6 +27,8 @@ package volk
     summary SUMMARY
     platform windows-mingw
     version VERSION
+    depends ffi-helper
+
     alias "/lib/libvolk.dll" (artifact "libvolk.dll")
     alias "/lib/scopes/packages/volk.sc" bindings
     alias "/include/volk.h" "{build-path}/volk.h"
@@ -36,6 +38,8 @@ package volk
     summary SUMMARY
     platform linux unknown
     version VERSION
+    depends ffi-helper
+
     alias "/lib/libvolk.dll" (artifact "libvolk.so")
     alias "/lib/scopes/packages/volk.sc" bindings
     alias "/include/volk.h" "{build-path}/volk.h"

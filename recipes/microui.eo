@@ -19,6 +19,7 @@ package microui
     summary SUMMARY
     platform linux unknown
     version VERSION
+    depends ffi-helper
 
     libname := "libmicroui.so"
     alias "/lib/{libname}" (shared-library libname)
@@ -29,6 +30,7 @@ package microui
     summary SUMMARY
     platform windows-mingw
     version VERSION
+    depends ffi-helper
 
     libname := "microui.dll"
     alias "/lib/{libname}" (shared-library libname)

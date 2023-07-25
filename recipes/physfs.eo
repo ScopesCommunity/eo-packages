@@ -35,7 +35,7 @@ package physfs
     summary SUMMARY
     version VERSION
     platform linux unknown
-    depends patchelf
+    depends patchelf ffi-helper
 
     preinstall-dir := (preinstall-dir "Unix Makefiles" "make")
     libpath := (patchelf "libphysfs.so" "{preinstall-dir}/lib/libphysfs.so")
@@ -48,6 +48,7 @@ package physfs
     summary SUMMARY
     version VERSION
     platform windows-mingw
+    depends ffi-helper
 
     preinstall-dir := (preinstall-dir "MinGW Makefiles" "mingw32-make")
     alias "lib/physfs.dll" "{preinstall-dir}/bin/libphysfs.dll"
