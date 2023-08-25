@@ -26,7 +26,6 @@ package cJSON
     summary SUMMARY
     version VERSION
     platform linux unknown
-    depends ffi-helper
 
     alias "/lib/libcjson.so" "{preinstall-dir}/libcjson.so"
     alias "include/cJSON.h" "{src-dir}/cJSON.h"
@@ -37,7 +36,6 @@ package cJSON
     summary SUMMARY
     version VERSION
     platform windows-mingw
-    depends ffi-helper
 
     alias "/lib/libcjson.dll" "{preinstall-dir}/cjson.dll"
     alias "include/cJSON.h" "{src-dir}/cJSON.h"
