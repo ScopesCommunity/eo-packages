@@ -9,7 +9,7 @@ default
 using import ffi-helper
 
 let header =
-    include "stb_image_resize.h"
+    include "stb_image_resize2.h"
 
 ..
     filter-scope header.extern "^stbir_"
