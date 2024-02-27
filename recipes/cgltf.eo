@@ -33,8 +33,7 @@ package cgltf
 
     alias "/include/cgltf.h" "{source-path}/cgltf.h"
     alias "/include/cgltf_write.h" "{source-path}/cgltf_write.h"
-
-    in "/lib/scopes/packages" "{bindings}/bindings/cgltf.sc"
+    alias "/lib/scopes/packages/cgltf.sc" bindings
 
 package cgltf
     summary SUMMARY
@@ -46,5 +45,4 @@ package cgltf
 
     alias "/include/cgltf.h" "{source-path}/cgltf.h"
     alias "/include/cgltf_write.h" "{source-path}/cgltf_write.h"
-
-    in "/lib/scopes/packages" "{bindings}/bindings/cgltf.sc"
+    alias "/lib/scopes/packages/cgltf.sc" bindings
