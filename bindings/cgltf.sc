@@ -8,12 +8,15 @@ for k v in header.typedef
         local old-symbols : (Array Symbol)
         tname := k as Symbol as string
         for k v in ('symbols T)
-            new-name := rslice (k as Symbol as string) ((countof tname) + 1) # _
-            'set-symbol T (Symbol new-name) v
-            'append old-symbols (k as Symbol)
+            field-name := k as Symbol as string
+            if ('match? str"^cgltf_" field-name)
+                new-name := rslice field-name ((countof tname) + 1) # _
+                'set-symbol T (Symbol new-name) v
+                'append old-symbols (k as Symbol)
 
         for s in old-symbols
             sc_type_del_symbol T s
+
 do
     using header.extern filter "^cgltf_(.+)$"
     using header.typedef filter "^cgltf_(.+)$"
