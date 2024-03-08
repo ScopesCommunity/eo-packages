@@ -31,7 +31,7 @@ fn patchelf (soname libpath)
         libpath
 
 bindings :=
-    download "https://raw.githubusercontent.com/ScopesCommunity/eo-packages/main/bindings/sdl.sc"
+    download "https://raw.githubusercontent.com/ScopesCommunity/eo-packages/main/bindings/sdl2.sc"
 
 license := (download "https://raw.githubusercontent.com/libsdl-org/SDL/SDL2/LICENSE.txt")
 
@@ -44,9 +44,9 @@ package sdl2
     preinstall-dir := (preinstall-dir "make")
     libpath := (patchelf "libSDL2.so" "{preinstall-dir}/lib/libSDL2.so")
     alias "/lib/libSDL2.so" libpath
-    alias "/lib/scopes/packages/sdl.sc" bindings
+    alias "/lib/scopes/packages/sdl2.sc" bindings
     in "/include" "{preinstall-dir}/include/SDL2"
-    alias "/licenses/sdl2.txt" license
+    alias "/licenses/SDL2.txt" license
 
 package sdl2
     summary SUMMARY
@@ -56,6 +56,6 @@ package sdl2
 
     preinstall-dir := (preinstall-dir "mingw32-make")
     alias "/lib/SDL2.dll" "{preinstall-dir}/bin/SDL2.dll"
-    alias "/lib/scopes/packages/sdl.sc" bindings
+    alias "/lib/scopes/packages/sdl2.sc" bindings
     in "/include" "{preinstall-dir}/include/SDL2"
-    alias "/licenses/sdl2.txt" license
+    alias "/licenses/SDL2.txt" license
