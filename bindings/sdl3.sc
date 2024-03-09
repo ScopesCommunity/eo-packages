@@ -30,8 +30,9 @@ for k v in header.typedef
         tname := k as Symbol as string
         for k v in ('symbols T)
             field-name := k as Symbol as string
-            if ('match? str"^SDLK?_" field-name)
-                new-name := rslice field-name ((countof tname) + 1) # _
+            match? start end := 'match? str"^SDLK?_" field-name
+            if match?
+                new-name := rslice field-name end
                 'set-symbol T (Symbol new-name) v
                 'append old-symbols (k as Symbol)
 
