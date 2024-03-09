@@ -18,26 +18,28 @@ do
     using header.const filter "^(SDLK?_.+)"
     local-scope;
 
-inline enum-constructor (T)
-    bitcast 0 T
+inline augment-enum (T prefix)
+    local old-symbols : (Array Symbol)
+    for k v in ('symbols T)
+        field-name := k as Symbol as string
+        match? start end := 'match? (.. str"^" prefix) field-name
+        if match?
+            new-name := rslice field-name end
+            'set-symbol T (Symbol new-name) v
+            'append old-symbols (k as Symbol)
 
-for k v in header.typedef
-    T := v as type
-    if (T < CEnum)
-        'set-symbol T '__typecall enum-constructor
+    for s in old-symbols
+        sc_type_del_symbol T s
 
-        local old-symbols : (Array Symbol)
-        tname := k as Symbol as string
-        for k v in ('symbols T)
-            field-name := k as Symbol as string
-            match? start end := 'match? str"^SDLK?_" field-name
-            if match?
-                new-name := rslice field-name end
-                'set-symbol T (Symbol new-name) v
-                'append old-symbols (k as Symbol)
-
-        for s in old-symbols
-            sc_type_del_symbol T s
+augment-enum sdl.EventType "SDL_EVENT_"
+augment-enum sdl.JoystickPowerLevel "SDL_JOYSTICK_POWER_"
+augment-enum sdl.KeyCode "SDLK_"
+augment-enum sdl.Keymod "SDL_KMOD_"
+augment-enum sdl.MessageBoxButtonFlags "SDL_MESSAGEBOX_BUTTON_"
+augment-enum sdl.MessageBoxFlags "SDL_MESSAGEBOX_"
+augment-enum sdl.PowerState "SDL_POWERSTATE_"
+augment-enum sdl.Scancode "SDL_SCANCODE_"
+augment-enum sdl.WindowFlags "SDL_WINDOW_"
 
 let sdl-macros =
     do
