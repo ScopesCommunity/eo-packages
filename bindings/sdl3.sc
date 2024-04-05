@@ -32,7 +32,7 @@ inline augment-enum (T prefix)
         sc_type_del_symbol T s
 
 augment-enum sdl.EventType "SDL_EVENT_"
-augment-enum sdl.JoystickPowerLevel "SDL_JOYSTICK_POWER_"
+augment-enum sdl.JoystickConnectionState "SDL_JOYSTICK_CONNECTION_"
 augment-enum sdl.KeyCode "SDLK_"
 augment-enum sdl.Keymod "SDL_KMOD_"
 augment-enum sdl.MessageBoxButtonFlags "SDL_MESSAGEBOX_BUTTON_"
