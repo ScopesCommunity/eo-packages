@@ -33,13 +33,9 @@ wgpu-define :=
             locals;
         filter-scope header.define "^(?=WGPU_)"
 
-inline enum-constructor (T)
-    bitcast 0 T
-
 for k v in header.enum
     local old-symbols : (Array Symbol)
     T := (v as type)
-    'set-symbol T '__typecall enum-constructor
 
     for k v in ('symbols T)
         original-symbol  := k as Symbol
