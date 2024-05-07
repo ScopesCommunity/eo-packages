@@ -82,6 +82,10 @@ augment-enum sdl.MessageBoxFlags "SDL_MESSAGEBOX_"
 augment-enum sdl.PowerState "SDL_POWERSTATE_"
 augment-enum sdl.Scancode "SDL_SCANCODE_"
 augment-enum sdl.WindowFlags "SDL_WINDOW_"
+augment-enum sdl.GamepadAxis "SDL_GAMEPAD_AXIS_"
+augment-enum sdl.GamepadButton "SDL_GAMEPAD_BUTTON_"
+augment-enum sdl.InitFlags "SDL_INIT_"
+augment-enum sdl.MessageBoxFlags "SDL_MESSAGEBOX_"
 
 let sdl-macros =
     do
@@ -117,4 +121,4 @@ let sdl-macros =
 
         local-scope;
 
-result := sdl .. sdl-macros
+result := sdl-macros .. sdl
