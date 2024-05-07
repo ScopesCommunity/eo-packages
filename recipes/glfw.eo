@@ -31,7 +31,6 @@ package glfw
     platform linux unknown
     version VERSION
     summary SUMMARY
-    depends ffi-helper
 
     preinstall-dir := (preinstall-dir "make" "Unix Makefiles")
     alias "/lib/libglfw.so" "{preinstall-dir}/lib/libglfw.so"
@@ -43,7 +42,6 @@ package glfw
     platform windows-mingw
     version VERSION
     summary SUMMARY
-    depends ffi-helper
 
     preinstall-dir := (preinstall-dir "mingw32-make" "MinGW Makefiles")
     alias "/lib/glfw3.dll" "{preinstall-dir}/bin/glfw3.dll"

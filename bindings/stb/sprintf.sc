@@ -6,9 +6,11 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import ffi-helper
+using import include
 
 let header =
     include "stb_sprintf.h"
 
-filter-scope header.extern "^stbsp_"
+do
+    using header.extern filter "^stbsp_(.+)$"
+    local-scope;

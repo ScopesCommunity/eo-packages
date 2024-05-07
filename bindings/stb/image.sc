@@ -6,9 +6,11 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import ffi-helper
+using import include
 
 let header =
     include "stb_image.h"
 
-filter-scope header.extern "^stbi_"
+do
+    using header.extern filter "^stbi_(.+)$"
+    local-scope;

@@ -6,14 +6,33 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import ffi-helper
+using import Array include slice
 
-let header =
-    include
-        "physfs.h"
+header := include "physfs.h"
 
-let physfs-extern = (filter-scope header.extern "^PHYSFS_")
-let physfs-typedef = (filter-scope header.typedef "^PHYSFS_")
-let physfs-define = (filter-scope header.define "^PHYSFS_")
+for k v in header.typedef
+    if (('typeof v) != type)
+        continue;
 
-.. physfs-extern physfs-typedef physfs-define
+    local old-symbols : (Array Symbol)
+    T := (v as type)
+    if (T < CEnum)
+        for k v in ('symbols T)
+            original-symbol  := k as Symbol
+            original-name    := original-symbol as string
+            match? start end := 'match? str"^PHYSFS_" original-name
+
+            if match?
+                field := (Symbol (rslice original-name end))
+                'set-symbol T field v
+                'append old-symbols original-symbol
+
+        for sym in old-symbols
+            sc_type_del_symbol T sym
+
+do
+    using header.extern  filter "^PHYSFS_(.+)$"
+    using header.typedef filter "^PHYSFS_(.+)$"
+    using header.define  filter "^PHYSFS_(.+)$"
+
+    local-scope;

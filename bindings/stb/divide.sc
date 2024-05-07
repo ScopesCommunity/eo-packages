@@ -6,9 +6,11 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import ffi-helper
+using import include
 
 let header =
     include "stb_divide.h"
 
-filter-scope header.extern "^stb_"
+do
+    using header.extern filter "^stb_(.+)$"
+    local-scope;

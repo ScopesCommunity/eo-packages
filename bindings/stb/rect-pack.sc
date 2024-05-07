@@ -6,14 +6,13 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import ffi-helper
+using import include
 
 let header =
     include "stb_rect_pack.h"
 
-'bind
-    ..
-        filter-scope header.typedef "^stbrp_"
-        filter-scope header.extern "^stbrp_"
-    '!header
-    header
+do
+    using header.typedef filter "^stbrp_(.+)$"
+    using header.extern  filter "^stbrp_(.+)$"
+    let !header = header
+    local-scope;

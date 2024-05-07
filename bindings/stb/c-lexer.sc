@@ -6,11 +6,12 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import ffi-helper
+using import include
 
 let header =
     include "stb_c_lexer.h"
 
-..
-    filter-scope header.extern "^stb_c_lexer_"
-    filter-scope header.typedef "^stb_"
+do
+    using header.extern  filter "^stb_c_lexer_(.+)$"
+    using header.typedef filter "^stb_(.+)$"
+    local-scope;

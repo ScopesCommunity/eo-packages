@@ -6,6 +6,8 @@ case 'windows
 default
     error "Unsupported OS"
 
+using import include
+
 header := include "cJSON.h"
 
 do

@@ -6,14 +6,13 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import ffi-helper
+using import include
 
-let header =                                               
-    include                                                
-        "GLFW/glfw3.h"                                     
+header := include "GLFW/glfw3.h"
                                                            
-let glfw-extern = (filter-scope header.extern "^glfw")     
-let glfw-typedef = (filter-scope header.typedef "^GLFW")   
-let glfw-define = (filter-scope header.define "^(?=GLFW_)")
-                                                           
-.. glfw-extern glfw-typedef glfw-define                    
+do
+    using header.extern  filter "^glfw(.+)$"
+    using header.typedef filter "^GLFW(.+)$"
+    using header.define  filter "^(GLFW_.+)$"
+
+    local-scope;

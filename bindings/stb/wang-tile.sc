@@ -6,11 +6,12 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import ffi-helper
+using import include
 
 let header =
     include "stb_herringbone_wang_tile.h"
 
-..
-    filter-scope header.extern "^stbhw_"
-    filter-scope header.typedef "^stbhw_"
+do
+    using header.extern  filter "^stbhw_(.+)$"
+    using header.typedef filter "^stbhw_(.+)$"
+    local-scope;

@@ -6,7 +6,7 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import Array slice
+using import Array slice include
 
 let header =
     include

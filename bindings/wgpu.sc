@@ -6,32 +6,9 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import Array slice
-using import ffi-helper
+using import Array include slice
 
 header := include "wgpu.h"
-
-let wgpu-extern = (filter-scope header.extern "^wgpu")
-let wgpu-typedef = (filter-scope header.typedef "^WGPU")
-
-let SIZE_MAX =
-    static-if (operating-system == 'windows)
-        header.define.SIZE_MAX
-    else
-        header.define.__SIZE_MAX__
-
-wgpu-define :=
-    ..
-        do
-            let WGPU_ARRAY_LAYER_COUNT_UNDEFINED = 0xffffffff:u32
-            let WGPU_COPY_STRIDE_UNDEFINED = 0xffffffff:u32
-            let WGPU_LIMIT_U32_UNDEFINED = 0xffffffff:u32
-            let WGPU_LIMIT_U64_UNDEFINED = 0xffffffffffffffff:u64
-            let WGPU_MIP_LEVEL_COUNT_UNDEFINED = 0xffffffff:u32
-            let WGPU_WHOLE_MAP_SIZE = SIZE_MAX
-            let WGPU_WHOLE_SIZE = 0xffffffffffffffff:u64
-            locals;
-        filter-scope header.define "^(?=WGPU_)"
 
 for k v in header.enum
     local old-symbols : (Array Symbol)
@@ -52,4 +29,20 @@ for k v in header.enum
 
 run-stage;
 
-.. wgpu-extern wgpu-typedef wgpu-define
+let SIZE_MAX =
+    header.define.SIZE_MAX
+
+do
+    using header.extern  filter "^wgpu(.+)$"
+    using header.typedef filter "^WGPU(.+)$"
+    using header.define  filter "^(WGPU_.+)$"
+
+    let WGPU_ARRAY_LAYER_COUNT_UNDEFINED = 0xffffffff:u32
+    let WGPU_COPY_STRIDE_UNDEFINED = 0xffffffff:u32
+    let WGPU_LIMIT_U32_UNDEFINED = 0xffffffff:u32
+    let WGPU_LIMIT_U64_UNDEFINED = 0xffffffffffffffff:u64
+    let WGPU_MIP_LEVEL_COUNT_UNDEFINED = 0xffffffff:u32
+    let WGPU_WHOLE_MAP_SIZE = SIZE_MAX
+    let WGPU_WHOLE_SIZE = 0xffffffffffffffff:u64
+
+    local-scope;

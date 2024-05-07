@@ -6,11 +6,12 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import ffi-helper
+using import include
 
 let header =
     include "stb_hexwave.h"
 
-..
-    filter-scope header.extern "^hexwave_"
-    filter-scope header.typedef "^(?=Hex)"
+do
+    using header.extern  filter "^hexwave_(.+)$"
+    using header.typedef filter "^([Hh]ex.+)$"
+    local-scope;

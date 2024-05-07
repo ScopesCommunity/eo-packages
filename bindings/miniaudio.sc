@@ -6,15 +6,12 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import ffi-helper
+#FIXME: change to include module once it's fixed
+header := deprecated-include "miniaudio.h"
 
-let header =
-    include
-        "miniaudio.h"
-
-let miniaudio-extern = (filter-scope header.extern "^ma_")
-let miniaudio-typedef = (filter-scope header.typedef "^ma_")
-let miniaudio-define = (filter-scope header.define "^(?=MA_)")
-let miniaudio-const = (filter-scope header.const "^(?=MA_)")
-
-.. miniaudio-extern miniaudio-typedef miniaudio-define miniaudio-const
+do
+    using header.extern  filter "^ma_(.+)$"
+    using header.typedef filter "^ma_(.+)$"
+    using header.define  filter "^(ma_.+)$"
+    using header.const   filter "^(MA_.+)$"
+    local-scope;

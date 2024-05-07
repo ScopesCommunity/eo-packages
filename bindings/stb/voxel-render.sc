@@ -6,11 +6,12 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import ffi-helper
+using import include
 
 let header =
     include "stb_voxel_render.h"
 
-..
-    filter-scope header.extern "^stbvox_"
-    filter-scope header.typedef "^stbvox_"
+do
+    using header.extern  filter "^stbvox_(.+)$"
+    using header.typedef filter "^stbvox_(.+)$"
+    local-scope;

@@ -6,9 +6,11 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import ffi-helper
+using import include
 
 let header =
     include "stb_leakcheck.h"
 
-filter-scope header.extern "^stb_leakcheck_"
+do
+    using header.extern filter "^stb_leakcheck_(.+)$"
+    local-scope;

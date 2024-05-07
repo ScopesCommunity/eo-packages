@@ -6,14 +6,13 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import ffi-helper
+using import include
 
-let header =
-    include
-        "volk.h"
+header := include "volk.h"
 
-let volk-extern = (filter-scope header.extern "(^vk|(?=volk))")
-let volk-typedef = (filter-scope header.typedef "^Vk")
-let volk-define = (filter-scope header.define "^(?=VK_)")
-
-.. volk-extern volk-typedef volk-define
+do
+    using header.extern  filter "^vk(.+)$"
+    using header.extern  filter "^(volk.+)$"
+    using header.typedef filter "^Vk(.+)$"
+    using header.define  filter "^(VK_.+)$"
+    local-scope;

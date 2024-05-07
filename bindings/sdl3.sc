@@ -6,15 +6,58 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import Array slice
+using import Array format slice String include
 
 header := include "SDL3/SDL.h"
+
+vvv bind subscope
+do
+    using header.define filter "^(SDLK_.+)$"
+    local-scope;
+
+vvv bind incomplete-macros
+fold (scope = (Scope)) for k v in subscope
+    if (('typeof v) == Symbol)
+        if ((v as Symbol) == 'could-not-translate-macro-excess-tokens)
+            'bind scope k v
+        else scope
+    else scope
+
+local macro-gen-code : String
+for k v in incomplete-macros
+    macro-gen-code ..=
+        ..
+            format "typeof({k}) ___scopes_macro_constant_{k}() \{ return {k}; \}\n"
+                k = (k as Symbol as string)
+macro-gen-code as:= string
+
+sugar include* (code)
+    code := sc_expand code '() sugar-scope
+    qq
+        [include] [((.. "#include \"SDL3/SDL.h\" \n" (code as string)) as string)]
+            using [header]
+
+run-stage;
+
+header := include* macro-gen-code
+
+vvv bind macro-gen-fns
+do
+    using header.extern filter "^___scopes_macro_constant_(.+)$"
+    local-scope;
+
+'bind header 'define
+    fold (scope = header.define) for k v in macro-gen-fns
+        name := Symbol (rslice (k as Symbol as string) (countof str"___scopes_macro_constant_"))
+        'bind scope name `(v)
+
+run-stage;
 
 vvv bind sdl
 do
     using header.extern filter "^SDL_(.+)$"
     using header.typedef filter "^SDL_(.+)$"
-    using header.define filter "^(SDL_.+)$"
+    using header.define filter "^(SDLK?_.+)$"
     using header.const filter "^(SDLK?_.+)"
     local-scope;
 
@@ -33,7 +76,6 @@ inline augment-enum (T prefix)
 
 augment-enum sdl.EventType "SDL_EVENT_"
 augment-enum sdl.JoystickConnectionState "SDL_JOYSTICK_CONNECTION_"
-augment-enum sdl.KeyCode "SDLK_"
 augment-enum sdl.Keymod "SDL_KMOD_"
 augment-enum sdl.MessageBoxButtonFlags "SDL_MESSAGEBOX_BUTTON_"
 augment-enum sdl.MessageBoxFlags "SDL_MESSAGEBOX_"
@@ -75,4 +117,4 @@ let sdl-macros =
 
         local-scope;
 
-sdl .. sdl-macros
+result := sdl .. sdl-macros

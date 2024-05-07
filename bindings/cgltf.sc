@@ -1,6 +1,6 @@
-header := include "cgltf_write.h"
+using import Array slice include
 
-using import Array slice
+header := include "cgltf_write.h"
 
 for k v in header.typedef
     T := v as type

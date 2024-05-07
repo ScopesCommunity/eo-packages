@@ -6,16 +6,14 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import ffi-helper
+using import include
 
-let header =
-    include
-        """"#include <glad/glad.h>
+header := include "glad/glad.h"
 
-let glad-typedef = (filter-scope header.typedef "^GL")
-let glad-define = (filter-scope header.define "^((?=GL_)|gl(?=[A-Z]))")
+do
+    using header.typedef filter "^GL(.+)$"
+    using header.define  filter "^(GL_.+)$"
+    using header.define  filter "^gl([A-Z].+)$"
+    gladLoadGL := header.extern.gladLoadGL
 
-'bind
-    .. glad-typedef glad-define
-    'gladLoadGL
-    header.extern.gladLoadGL
+    local-scope;

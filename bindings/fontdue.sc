@@ -6,13 +6,11 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import ffi-helper
+using import include
 
-let header =
-    include
-        "fontdue.h"
+header := include "fontdue.h"
 
-let fontdue-extern = (filter-scope header.extern "^ftd_")
-let fontdue-typedef = (filter-scope header.typedef "^FTD_")
-
-.. fontdue-extern fontdue-typedef
+do
+    using header.extern  filter "^ftd_(.+)$"
+    using header.typedef filter "^FTD_(.+)$"
+    local-scope;

@@ -6,12 +6,13 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import ffi-helper
+using import include
 
 let header =
     include "stb_vorbis.c"
         options "-DSTB_VORBIS_HEADER_ONLY"
 
-..
-    filter-scope header.extern "^stb_vorbis_"
-    filter-scope header.typedef "^stb_vorbis_"
+do
+    using header.extern  filter "^stb_vorbis_(.+)$"
+    using header.typedef filter "^stb_vorbis_(.+)$"
+    local-scope;

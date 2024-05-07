@@ -6,11 +6,12 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import ffi-helper
+using import include
 
 let header =
     include "stb_image_resize2.h"
 
-..
-    filter-scope header.extern "^stbir_"
-    filter-scope header.typedef "^stbir_"
+do
+    using header.extern  filter "^stbir_(.+)$"
+    using header.typedef filter "^stbir_(.+)$"
+    local-scope;
