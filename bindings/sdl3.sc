@@ -43,13 +43,13 @@ header := include* macro-gen-code
 
 vvv bind macro-gen-fns
 do
-    using header.extern filter "^___scopes_macro_constant_(.+)$"
+    using header.extern filter "^___scopes_macro_constant_.+$"
     local-scope;
 
-'bind header 'define
-    fold (scope = header.define) for k v in macro-gen-fns
-        name := Symbol (rslice (k as Symbol as string) (countof str"___scopes_macro_constant_"))
-        'bind scope name `(v)
+vvv bind header.define
+fold (scope = header.define) for k v in macro-gen-fns
+    name := Symbol (rslice (k as Symbol as string) (countof str"___scopes_macro_constant_"))
+    'bind scope name `(v)
 
 run-stage;
 
@@ -60,6 +60,8 @@ do
     using header.define filter "^(SDLK?_.+)$"
     using header.const filter "^(SDLK?_.+)"
     local-scope;
+
+run-stage;
 
 inline augment-enum (T prefix)
     local old-symbols : (Array Symbol)
