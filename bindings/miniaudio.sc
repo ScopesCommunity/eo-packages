@@ -6,8 +6,9 @@ case 'windows
 default
     error "Unsupported OS"
 
-#FIXME: change to include module once it's fixed
-header := deprecated-include "miniaudio.h"
+using import include
+
+header := include "miniaudio.h"
 
 do
     using header.extern  filter "^ma_(.+)$"
