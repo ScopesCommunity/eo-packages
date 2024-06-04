@@ -12,7 +12,7 @@ header := include "SDL3/SDL.h"
 
 vvv bind subscope
 do
-    using header.define filter "^(SDLK_.+)$"
+    using header.define filter "^(SDLK_.+|SDL_WINDOW_.+)$"
     local-scope;
 
 vvv bind incomplete-macros
