@@ -6,7 +6,7 @@ case 'windows
 default
     error "Unsupported OS"
 
-using import Array include slice
+using import Array enum include slice
 
 header := include "wgpu.h"
 
@@ -44,5 +44,40 @@ do
     let WGPU_MIP_LEVEL_COUNT_UNDEFINED = 0xffffffff:u32
     let WGPU_WHOLE_MAP_SIZE = SIZE_MAX
     let WGPU_WHOLE_SIZE = 0xffffffffffffffff:u64
+
+    vvv bind InstanceBackend
+    do
+        using header.extern filter "^WGPUInstanceBackend_(.+)$"
+        local-scope;
+
+    vvv bind InstanceFlag
+    do
+        using header.extern filter "^WGPUInstanceFlag_(.+)$"
+        local-scope;
+
+    vvv bind BufferUsage
+    do
+        using header.extern filter "^WGPUBufferUsage_(.+)$"
+        local-scope;
+
+    vvv bind ColorWriteMask
+    do
+        using header.extern filter "^WGPUColorWriteMask_(.+)$"
+        local-scope;
+
+    vvv bind MapMode
+    do
+        using header.extern filter "^WGPUMapMode_(.+)$"
+        local-scope;
+
+    vvv bind ShaderStage
+    do
+        using header.extern filter "^WGPUShaderStage_(.+)$"
+        local-scope;
+
+    vvv bind TextureUsage
+    do
+        using header.extern filter "^WGPUTextureUsage_(.+)$"
+        local-scope;
 
     local-scope;
