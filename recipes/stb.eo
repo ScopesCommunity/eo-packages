@@ -36,8 +36,9 @@ amalgamated-source :=
             #define STB_DXT_IMPLEMENTATION
             #include "stb_dxt.h"
 
-            #define STB_HERRINGBONE_WANG_TILE_IMPLEMENTATION
-            #include "stb_herringbone_wang_tile.h"
+            // Currently doesn't compile
+            // #define STB_HERRINGBONE_WANG_TILE_IMPLEMENTATION
+            // #include "stb_herringbone_wang_tile.h"
 
             #define STB_C_LEXER_IMPLEMENTATION
             #include "stb_c_lexer.h"
@@ -81,7 +82,7 @@ package stb
     alias "/include/stb_sprintf.h" "{source-path}/stb_sprintf.h"
     alias "/include/stb_voxel_render.h" "{source-path}/stb_voxel_render.h"
     alias "/include/stb_dxt.h" "{source-path}/stb_dxt.h"
-    alias "/include/stb_herringbone_wang_tile.h" "{source-path}/stb_herringbone_wang_tile.h"
+    # alias "/include/stb_herringbone_wang_tile.h" "{source-path}/stb_herringbone_wang_tile.h"
     alias "/include/stb_c_lexer.h" "{source-path}/stb_c_lexer.h"
     alias "/include/stb_divide.h" "{source-path}/stb_divide.h"
     alias "/include/stb_leakcheck.h" "{source-path}/stb_leakcheck.h"
@@ -107,7 +108,7 @@ package stb
     alias "/include/stb_sprintf.h" "{source-path}/stb_sprintf.h"
     alias "/include/stb_voxel_render.h" "{source-path}/stb_voxel_render.h"
     alias "/include/stb_dxt.h" "{source-path}/stb_dxt.h"
-    alias "/include/stb_herringbone_wang_tile.h" "{source-path}/stb_herringbone_wang_tile.h"
+    # alias "/include/stb_herringbone_wang_tile.h" "{source-path}/stb_herringbone_wang_tile.h"
     alias "/include/stb_c_lexer.h" "{source-path}/stb_c_lexer.h"
     alias "/include/stb_divide.h" "{source-path}/stb_divide.h"
     alias "/include/stb_leakcheck.h" "{source-path}/stb_leakcheck.h"
