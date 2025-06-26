@@ -8,7 +8,7 @@ fn shared-library (libname)
     then
         bindir := (mkdir "{source-path}/build")
         cmd := (shell bindir)
-        cmd "gcc -shared -fPIC -O2 -o {libname} -I.. -x c {source-path}/remimu.h"
+        cmd "gcc -shared -fPIC -O2 -o {libname} -DREMIMU_FUNC_VISIBILITY=extern -I.. -x c {source-path}/remimu.h"
         "{bindir}/{libname}"
 
 bindings :=
