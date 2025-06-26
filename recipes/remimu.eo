@@ -1,6 +1,8 @@
 VERSION := "main"
 SUMMARY := "Single-file header-only regex engine"
 
+update-url "https://github.com/ScopesCommunity/eo-packages/raw/refs/heads/main/recipes/remimu.eo"
+
 archive := (download "https://github.com/wareya/Remimu/archive/{VERSION}.tar.gz")
 source-path := (commonpath (extract archive))
 
