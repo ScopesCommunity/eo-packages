@@ -29,6 +29,14 @@ for k v in incomplete-macros
         ..
             format "typeof({k}) ___scopes_macro_constant_{k}() \{ return {k}; \}\n"
                 k = (k as Symbol as string)
+
+macro-gen-code ..=
+    """"SDL_Thread * SDLCALL ___scopes_macro_fn_CreateThread(SDL_ThreadFunction fn, const char *name, void *data) {
+            return SDL_CreateThread(fn, name, data);
+        }
+        SDL_Thread * SDLCALL ___scopes_macro_fn_CreateThreadWithProperties(SDL_PropertiesID props) {
+            return SDL_CreateThreadWithProperties(props);
+        }
 macro-gen-code as:= string
 
 sugar include* (code)
@@ -59,6 +67,9 @@ do
     using header.typedef filter "^SDL_(.+)$"
     using header.define filter "^(SDLK?_.+)$"
     using header.const filter "^(SDLK?_.+)"
+
+    using header.extern filter "^___scopes_macro_fn_(.+)$"
+
     local-scope;
 
 run-stage;
