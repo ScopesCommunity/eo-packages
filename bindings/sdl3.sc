@@ -44,6 +44,7 @@ sugar include* (code)
     qq
         [include] [((.. "#include \"SDL3/SDL.h\" \n" (code as string)) as string)]
             using [header]
+            options ("-L" .. project-dir .. "/lib") "-lSDL3"
 
 run-stage;
 
